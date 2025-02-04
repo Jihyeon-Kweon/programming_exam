@@ -87,31 +87,26 @@ public class ChessGame {
     public void makeMove(ChessMove move) throws InvalidMoveException {
         ChessPiece piece = board.getPiece(move.getStartPosition());
 
-        if (piece == null || piece.getTeamColor() != currentTurn){
-            throw new InvalidMoveException("Invalid move: There is no piece at the start point or It's wrong turn.");
+        if (piece == null || piece.getTeamColor() != currentTurn) {
+            throw new InvalidMoveException("Invalid move: No piece at the start position or wrong team's turn.");
         }
 
         Collection<ChessMove> validMoves = validMoves(move.getStartPosition());
-        if (!validMoves.contains(move)){
-            throw new InvalidMoveException("Invalid move.");
+        if (!validMoves.contains(move)) {
+            throw new InvalidMoveException("Invalid move: This move is not valid for the selected piece.");
         }
 
-        ChessBoard tempBoard = new ChessBoard(board);
-        tempBoard.addPiece(move.getEndPosition(), piece);
-        tempBoard.addPiece(move.getStartPosition(), null);
-
-        if (isInCheck(currentTurn)){
-            throw new InvalidMoveException("Invalid move.");
+        ChessPiece newPiece = piece;
+        if (piece.getPieceType() == ChessPiece.PieceType.PAWN && move.getPromotionPiece() != null) {
+            newPiece = new ChessPiece(piece.getTeamColor(), move.getPromotionPiece());
         }
 
-        // add the piece at the new position
-        board.addPiece(move.getEndPosition(), piece);
-        // remove it at the previous position
+        board.addPiece(move.getEndPosition(), newPiece);
         board.addPiece(move.getStartPosition(), null);
-
 
         currentTurn = (currentTurn == TeamColor.WHITE) ? TeamColor.BLACK : TeamColor.WHITE;
     }
+
 
     /**
      * Determines if the given team is in check
