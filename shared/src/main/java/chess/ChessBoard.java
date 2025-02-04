@@ -46,7 +46,6 @@ public class ChessBoard {
         } else{
             board.put(position, piece);
         }
-        board.put(position, piece);
     }
 
     /**
@@ -102,7 +101,7 @@ public class ChessBoard {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
         ChessBoard that = (ChessBoard) obj;
-        return this.board.equals(that.board);
+        return board.equals(that.board);
     }
 
     @Override
