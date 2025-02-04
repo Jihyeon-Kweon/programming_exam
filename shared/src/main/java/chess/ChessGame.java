@@ -150,7 +150,34 @@ public class ChessGame {
      * @return True if the specified team is in checkmate
      */
     public boolean isInCheckmate(TeamColor teamColor) {
-        throw new UnsupportedOperationException("Not Implemented Yet.");
+        if (!isInCheck(teamColor)){
+            return false;
+        }
+
+        for (int row =1; row<=8;row++){
+            for (int col =1;col<=8;col++){
+                ChessPosition position = new ChessPosition(row,col);
+                ChessPiece piece = board.getPiece(position);
+
+                if (piece != null && piece.getTeamColor()==teamColor){
+                    for (ChessMove move: validMoves(position)){
+
+                        ChessBoard tempBoard = new ChessBoard(board); // 현재 보드 복사
+                        tempBoard.addPiece(move.getEndPosition(), piece); // 말 이동
+                        tempBoard.addPiece(move.getStartPosition(), null); // 원래 자리 비우기
+
+                        ChessGame tempGame = new ChessGame();
+                        tempGame.setBoard(tempBoard); // 임시 보드 설정
+                        tempGame.setTeamTurn(teamColor); // 현재 팀의 턴 설정
+
+                        if (!tempGame.isInCheck(teamColor)){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     /**
