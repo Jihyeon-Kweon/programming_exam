@@ -126,7 +126,7 @@ public class ChessGame {
                 ChessPosition position = new ChessPosition(row, col);
                 ChessPiece piece = board.getPiece(position);
 
-                if (piece != null && piece.getTeamColor() != teamColor) { // 상대 팀의 말일 경우
+                if (piece != null && piece.getTeamColor() != teamColor) {
                     for (ChessMove move : piece.pieceMoves(board, position)) {
                         if (move.getEndPosition().equals(kingPosition)) {
                             return true;
@@ -179,7 +179,7 @@ public class ChessGame {
                         tempBoard.addPiece(move.getStartPosition(), null);
 
                         ChessGame tempGame = new ChessGame();
-                        tempGame.setBoard(tempBoard); // 임시 보드 설정
+                        tempGame.setBoard(tempBoard);
                         tempGame.setTeamTurn(teamColor);
 
                         if (!tempGame.isInCheck(teamColor)){
