@@ -174,9 +174,9 @@ public class ChessGame {
                 if (piece != null && piece.getTeamColor()==teamColor){
                     for (ChessMove move: validMoves(position)){
 
-                        ChessBoard tempBoard = new ChessBoard(board); // 현재 보드 복사
-                        tempBoard.addPiece(move.getEndPosition(), piece); // 말 이동
-                        tempBoard.addPiece(move.getStartPosition(), null); // 원래 자리 비우기
+                        ChessBoard tempBoard = new ChessBoard(board);
+                        tempBoard.addPiece(move.getEndPosition(), piece);
+                        tempBoard.addPiece(move.getStartPosition(), null);
 
                         ChessGame tempGame = new ChessGame();
                         tempGame.setBoard(tempBoard); // 임시 보드 설정
