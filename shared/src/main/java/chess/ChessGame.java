@@ -180,7 +180,7 @@ public class ChessGame {
 
                         ChessGame tempGame = new ChessGame();
                         tempGame.setBoard(tempBoard); // 임시 보드 설정
-                        tempGame.setTeamTurn(teamColor); // 현재 팀의 턴 설정
+                        tempGame.setTeamTurn(teamColor);
 
                         if (!tempGame.isInCheck(teamColor)){
                             return false;
