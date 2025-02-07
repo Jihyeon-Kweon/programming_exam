@@ -15,7 +15,6 @@ public class ChessGame {
     private ChessBoard board;
     private TeamColor currentTurn;
 
-    // Constructor
     public ChessGame() {
         this.board = new ChessBoard();
         this.currentTurn = TeamColor.WHITE;
@@ -63,11 +62,10 @@ public class ChessGame {
         Collection<ChessMove> potentialMoves = piece.pieceMoves(board, startPosition);
 
         for (ChessMove move : potentialMoves) {
-            ChessBoard tempBoard = new ChessBoard(board); // Create a copy of the current board
+            ChessBoard tempBoard = new ChessBoard(board);
             tempBoard.addPiece(move.getEndPosition(), piece);
             tempBoard.addPiece(move.getStartPosition(), null);
 
-            // Check if the move puts own king in check
             ChessGame tempGame = new ChessGame();
             tempGame.setBoard(tempBoard);
             if (!tempGame.isInCheck(piece.getTeamColor())) {
@@ -151,7 +149,7 @@ public class ChessGame {
                 }
             }
         }
-        return null; // 왕을 찾을 수 없는 경우
+        return null;
     }
 
 
