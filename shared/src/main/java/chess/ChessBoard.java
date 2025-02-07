@@ -13,6 +13,7 @@ public class ChessBoard {
 
     private final Map<ChessPosition, ChessPiece> board;
 
+    // Constructor
     public ChessBoard() {
         this.board = new HashMap<>();
     }
